@@ -1,10 +1,11 @@
 class Solution {
 public:
-    vector<string> v;
-    
+    vector<string> res;
     void generate(string &s, int open, int close){
-        if(open == 0 && close==0)
-            v.push_back(s);
+        if(open==0 && close==0){
+            res.push_back(s);
+            return;
+        }
         
         if(open>0){
             s.push_back('(');
@@ -18,10 +19,11 @@ public:
             s.pop_back();
         }
     }
-    
+
     vector<string> generateParenthesis(int n) {
         string s;
         generate(s, n, n);
-        return v;
+        
+        return res;
     }
 };
