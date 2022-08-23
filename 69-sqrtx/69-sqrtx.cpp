@@ -4,7 +4,7 @@ public:
         if(x==0||x==1) return x;
         
         int last = x, first = 0, ans;
-        
+
         while(last>first){
             int mid = (first+ last)/2;
             if(mid == (x/mid)) return mid;
