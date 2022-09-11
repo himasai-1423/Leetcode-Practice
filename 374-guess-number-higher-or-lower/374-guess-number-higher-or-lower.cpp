@@ -20,6 +20,6 @@ public:
             else if(val==1) lo=mid+1;
             else hi = mid-1;
         }
-        return mid;
+        return hi;
     }
 };
