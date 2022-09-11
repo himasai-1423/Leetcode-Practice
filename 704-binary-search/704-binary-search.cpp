@@ -11,7 +11,6 @@ public:
             if(nums[mid]> target) hi = mid-1;
             else lo = mid + 1;
         }
-        // if(nums[lo] == target) return lo;
         return -1;
     }
 };
