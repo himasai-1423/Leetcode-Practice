@@ -1,7 +1,7 @@
 class Solution {
 public:
     int singleNonDuplicate(vector<int>& nums) {
-        map<int, int> m;
+        unordered_map<int, int> m;
         for(int &i: nums){
             m[i]++;
         }
