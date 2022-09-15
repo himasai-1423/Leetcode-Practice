@@ -10,7 +10,7 @@ public:
             if(nums[mid]>nums[hi]) lo = mid + 1;
             else hi = mid;
         }
-        val = hi;
+        val = lo;
         hi = n-1, lo =0;
         while(hi>=lo){
             mid = lo + (hi-lo)/2;
