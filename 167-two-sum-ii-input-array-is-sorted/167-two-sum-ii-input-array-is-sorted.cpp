@@ -8,6 +8,6 @@ public:
             else if(sum>target) j--;
             else i++;
         }
-        return {}; // not found
+        return {};
     }
 };
