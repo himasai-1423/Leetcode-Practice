@@ -1,16 +1,25 @@
 class Solution {
 public:
-    int minimumRecolors(string blocks, int k) {
-        int back = 0, front = 0, count_w = 0, ans = INT_MAX;
-        while(front < blocks.size()){
-            if(blocks[front] == 'W'){ count_w++; }
-            if(front - back + 1 == k){
-                ans = min(ans, count_w);
-                if(blocks[back] == 'W') count_w--;
-                back++;
+    int minimumRecolors(string s, int k)
+    {        
+        int count=0;
+        int i=0,j=0;
+        int n = s.length();
+        int mini=INT_MAX;
+        while(j<n)
+        {
+            if(s[j]=='W')
+                count++;
+            
+            if(j-i+1==k)
+            {
+                mini=min(mini,count);
+                if(s[i]=='W')
+                    count--;
+                i++;
             }
-            front++;
+            j++;
         }
-        return ans;
+        return mini;
     }
 };
