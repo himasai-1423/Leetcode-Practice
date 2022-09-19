@@ -1,22 +1,14 @@
 class Solution {
 public:
     int divisorSubstrings(int num, int k) {
-        string str = to_string(num);
-        int i = 0, j = 0, n = str.length();
-        int ind = 0;
-        
-        while(j < n)
+        string s = to_string(num);
+        int cnt = 0;
+        for(int i = 0; i <= s.length() - k; i++)
         {
-            if(j - i + 1 < k) ++j;
-            else if(j - i + 1 == k)
-            {
-                string s = str.substr(i,k);
-                int n = stoi(s);
-                if(n != 0 && num % n == 0 ) ++ind;
-                ++i;
-                ++j;
-            }
+            int part = stoi(s.substr(i,k));
+            if(part && (num%part == 0))
+                cnt++;
         }
-        return ind;
+        return cnt;
     }
 };
