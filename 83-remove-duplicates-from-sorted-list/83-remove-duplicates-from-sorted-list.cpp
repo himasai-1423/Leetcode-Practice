@@ -20,7 +20,7 @@ public:
                 delete next;
                 continue;
             }
-           if(curr->next == NULL) break;
+            if(curr->next == NULL) break;
             curr=curr->next;
         }
         return head;
