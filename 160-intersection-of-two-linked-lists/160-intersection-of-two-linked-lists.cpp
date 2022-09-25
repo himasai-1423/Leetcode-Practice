@@ -9,15 +9,16 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        set <ListNode *> s;
-        while(headA){
-            s.insert(headA);
-            headA = headA->next;
+        ListNode *ptrA=headA, *ptrB=headB;
+        if(ptrA == NULL || ptrB == NULL) return NULL;
+    
+        while(ptrA != ptrB){
+            if(ptrA == NULL) ptrA = headB;
+            else ptrA = ptrA->next;
+            
+            if(ptrB == NULL) ptrB = headA;
+            else ptrB=ptrB->next;
         }
-        while(headB){
-            if(s.count(headB)) return headB;
-            headB = headB->next;
-        }
-        return NULL;
+        return ptrA;
     }
 };
