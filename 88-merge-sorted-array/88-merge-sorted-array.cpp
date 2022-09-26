@@ -4,21 +4,10 @@ public:
         int i = m+n-1, a=m-1, b=n-1;
         
         while(a>=0 && b>=0){
-            if(nums1[a]>nums2[b]){
-                nums1[i] = nums1[a];
-                a--;
-            }
-            else {
-                nums1[i] = nums2[b];
-                b--;
-            }
-            i--;
+            if(nums1[a]>nums2[b]) nums1[i--] = nums1[a--];
+            else nums1[i--] = nums2[b--];
         }
         
-        while(b>=0){
-            nums1[i] = nums2[b];
-            b--;
-            i--;
-        }
+        while(b>=0) nums1[i--] = nums2[b--];
     }
 };
