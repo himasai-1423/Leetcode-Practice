@@ -20,10 +20,8 @@ public:
         int cnt = 1;
         int lim = 2;
         
-        while(slow != fast)
-        {
-            if(cnt == lim)
-            {
+        while(slow != fast){
+            if(cnt == lim){
                 cnt = 1;
                 lim = lim*2;
                 slow = fast;
