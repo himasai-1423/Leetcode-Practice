@@ -1,26 +1,26 @@
 class Solution {
 public:
     int thirdMax(vector<int>& nums) {
-        set<int> s;
-        int cnt =1;
+        set<int> sortedNums;
         
-        for(int i=0; i<nums.size(); i++){
-            s.insert(nums[i]);
-        }
-        int limi = s.size()-2;
-        if(s.size()<3){
-            int ele = *(--(s.end()));
-            //cout<<"Returning if"<<endl;
-            return ele;
+        for (int& num : nums) {
+            if (sortedNums.count(num)) {
+                continue;
+            }
+            if (sortedNums.size() == 3) {
+                if (*sortedNums.begin() < num) {
+                    sortedNums.erase(sortedNums.begin());
+                    sortedNums.insert(num);
+                }
+            } 
+            else {
+                sortedNums.insert(num);
+            }
         }
         
-        else{
-           for(auto i:s){
-               //cout<<"Returning else "<<limi<<endl;
-               if(cnt==limi) return i;
-               cnt++;
-           }
+        if (sortedNums.size() == 3) {
+            return *sortedNums.begin();
         }
-        return -1;
+        return *sortedNums.rbegin();
     }
 };
