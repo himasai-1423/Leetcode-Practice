@@ -9,7 +9,7 @@ public:
         }
         int limi = s.size()-2;
         if(s.size()<3){
-            int ele = *(--(s.end()));
+            int ele = *(s.rbegin());
             //cout<<"Returning if"<<endl;
             return ele;
         }
