@@ -21,8 +21,7 @@ public:
        {
            sum += T[s[i]];
        }
-   }
-   
+   }  
    return sum;
 }
 };
