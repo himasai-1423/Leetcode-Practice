@@ -12,5 +12,7 @@ public:
         ListNode* temp = node->next;
         node->next = temp->next;
         node->val=temp->val;
+        temp->next = NULL;
+        delete(temp);
     }
 };
