@@ -29,7 +29,7 @@ public:
         }
         
         prev->next = slowptr->next;
-        delete(slowptr);
+        delete slowptr;
         
         return head;
     }
