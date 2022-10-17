@@ -1,9 +1,15 @@
 class Solution {
 public:
     bool checkIfPangram(string sentence) {
-        unordered_set<char> s(sentence.begin(), sentence.end());
+        int seen = 0;
         
-        if(s.size() == 26) return true;
-        return false;
+        for (auto currChar : sentence) {
+            int mappedIndex = currChar - 'a';
+
+            int currBit = 1 << mappedIndex;
+
+            seen |= currBit;
+        }
+        return seen == (1 << 26) - 1;
     }
 };
