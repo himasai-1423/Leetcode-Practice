@@ -12,7 +12,7 @@
 class Solution {
 public:
     int minDepth(TreeNode* root) {
-    if (!root) return 0;
+    if (root == NULL) return 0;
     queue<TreeNode*> Q;
     Q.push(root);
     int i = 0;
@@ -27,6 +27,6 @@ public:
             if (rt->left==NULL && rt->right==NULL) return i;
         }
     }
-    return -1; //For the compiler thing. The code never runs here.
+    return -1;
 }
 };
