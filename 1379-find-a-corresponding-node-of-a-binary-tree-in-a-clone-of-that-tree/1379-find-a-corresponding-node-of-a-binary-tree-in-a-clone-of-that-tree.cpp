@@ -14,11 +14,12 @@ public:
         if(!original) return; 
         
         findTargetCopy(original->left, cloned->left, target, res);
+        
+        findTargetCopy(original->right, cloned->right, target, res);
         if(original==target){
             res = cloned;
             return;
         }
-        findTargetCopy(original->right, cloned->right, target, res);
     }
     
     TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target) {
