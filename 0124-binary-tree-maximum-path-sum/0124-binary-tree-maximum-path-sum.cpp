@@ -10,12 +10,13 @@
  * };
  */
 class Solution {
+    int res=INT_MIN;
 public:
-    int maxSum(TreeNode* root, int &res){
+    int maxSum(TreeNode* root){
         if(!root) return 0;
         
-        int lsum = maxSum(root->left, res);
-        int rsum = maxSum(root->right, res);
+        int lsum = maxSum(root->left);
+        int rsum = maxSum(root->right);
         
         int maxi= max(max(lsum, rsum)+root->val, root->val);
         int temp = max(maxi, lsum+rsum+root->val);
@@ -24,8 +25,7 @@ public:
         return maxi;
     }
     int maxPathSum(TreeNode* root) {
-        int res=INT_MIN;
-        maxSum(root, res);
+        maxSum(root);
         return res;
     }
 };
