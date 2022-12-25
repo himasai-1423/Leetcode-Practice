@@ -11,20 +11,20 @@
  */
 class Solution {
 public:
-    void traverseVertical(TreeNode* root, map<int, map<int, multiset<int>>> &m, int hd, int vd){
+    void traversalHelper(TreeNode* root, int hd, int vd, map<int, map<int, multiset<int>>> &m){
         if(!root) return;
-        m[hd][vd].insert(root->val);
-        traverseVertical(root->left, m, hd-1, vd+1);
         
-        traverseVertical(root->right, m, hd+1, vd+1);
-        }
+        m[hd][vd].insert(root->val);
+        
+        traversalHelper(root->left, hd-1, vd+1, m);
+        traversalHelper(root->right, hd+1, vd+1, m);
+    }
     
     vector<vector<int>> verticalTraversal(TreeNode* root) {
-        map<int, map<int, multiset<int>>> m;
-        int hd = 0, vd = 0;
         vector<vector<int>> res;
-        
-        traverseVertical(root, m, hd, vd);
+        int hd =0, vd=0;
+        map<int, map<int, multiset<int>>> m;
+        traversalHelper(root, hd, vd, m);
         
         for(auto i: m){
             vector<int> vec;
@@ -35,8 +35,6 @@ public:
             }
             res.push_back(vec);
         }
-            
-            
         return res;
     }
 };
