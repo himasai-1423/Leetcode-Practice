@@ -11,29 +11,45 @@
  */
 class Solution {
 public:
-    bool find(TreeNode* n, int val, string &path) {
-        if (n->val == val)
-            return true;
+    TreeNode* findLCA(TreeNode* root, int p, int q){
+        if(!root) return NULL;
+        if(root->val == p || root->val == q) return root;
         
-        if (n->left && find(n->left, val, path))
-            path.push_back('L');
+        TreeNode* left= findLCA(root->left, p, q);
+        TreeNode* right = findLCA(root->right, p, q);
         
-        else if (n->right && find(n->right, val, path))
-            path.push_back('R');
+        if(left && right) return root;
         
-        return !path.empty();
+        return (left==NULL)?right:left;
+        
     }
     
+    bool traverse(TreeNode* root, int val, string &path){
+        if(!root) return false;
+        if(root->val == val) return true;
+        
+        path.push_back('L');
+        if(traverse(root->left, val, path)) return true;
+        path.pop_back();
+        
+        path.push_back('R');
+        if(traverse(root->right, val, path)) return true;
+        path.pop_back();
+        
+        return false;
+    }
+    
+    
     string getDirections(TreeNode* root, int startValue, int destValue) {
-        string s_p, d_p;
-        find(root, startValue, s_p);
-        find(root, destValue, d_p);
+        TreeNode* lca = findLCA(root, startValue, destValue);
         
-        while (!s_p.empty() && !d_p.empty() && s_p.back() == d_p.back()) {
-            s_p.pop_back();
-            d_p.pop_back();
-        }
+        string LCA_to_start="", LCA_to_dest="";
         
-        return string(s_p.size(), 'U') + string(rbegin(d_p), rend(d_p));
+        traverse(lca, startValue, LCA_to_start);
+        traverse(lca, destValue, LCA_to_dest);
+        
+        for(auto& c : LCA_to_start) c = 'U';
+
+        return LCA_to_start + LCA_to_dest;
     }
 };
