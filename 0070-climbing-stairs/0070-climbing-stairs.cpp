@@ -1,19 +1,16 @@
 class Solution {
     public:
+    int totalStairs(int n, vector<int> &dp){
+        if(n==0) return 1;
+        else if(n<0) return 0;
+        
+        if(dp[n] != -1) return dp[n];
+        
+        return dp[n] = totalStairs(n-1, dp) + totalStairs(n-2, dp);
+    }
     int climbStairs(int n) {
-        if (n <= 1) {
-            return 1;
-        }
-
-        int prev1 = 1;
-        int prev2 = 2;
-
-        for (int i = 3; i <= n; i++) {
-            int newValue = prev1 + prev2;
-            prev1 = prev2;
-            prev2 = newValue;
-        }
-
-        return prev2;
+        vector<int> dp(n+1, -1);
+        
+        return totalStairs(n, dp);
     }
 };
