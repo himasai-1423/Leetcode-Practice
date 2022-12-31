@@ -10,17 +10,15 @@
  * };
  */
 
-
+class Pair {
+public:
+    int forwardSlash = -1;
+    int backwardSlash = -1;
+    int maxZZ = 0;
+};
 
 class Solution {
 public:
-    class Pair {
-    public:
-        int forwardSlash = -1;
-        int backwardSlash = -1;
-        int maxZZ = 0;
-    };
-    
     Pair findZigZag(TreeNode* root){
         if(!root) {
             Pair nodeAns;
