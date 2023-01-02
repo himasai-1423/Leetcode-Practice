@@ -21,7 +21,7 @@ public:
         return dp[idx][amount]= ways;
     }
     int change(int amount, vector<int>& coins) {
-        vector<vector<int>> dp(310, vector<int>(5010, -1));
+        vector<vector<int>> dp(coins.size()+3, vector<int>(amount+10, -1));
         
         return countCombinations(amount, coins, coins.size()-1, dp);
     }
