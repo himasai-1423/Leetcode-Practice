@@ -8,17 +8,17 @@ public:
         if(dp[idx][amt]!= -1) return dp[idx][amt];
                 
         int res = -1;
-        if(amt-coins[idx]<0){
-            int doNotTakeCoin = 0 + change(coins, idx-1, amt - 0);
-            res = doNotTakeCoin;
-        }
+        // if(amt-coins[idx]<0){
+        //     int doNotTakeCoin = 0 + change(coins, idx-1, amt - 0);
+        //     res = doNotTakeCoin;
+        // }
         
-        else{
+        // else{
             int takeCoin = 1 + change(coins, idx, amt - coins[idx]);
             int doNotTakeCoin = 0 + change(coins, idx - 1, amt - 0);
             
             res = min(takeCoin, doNotTakeCoin);
-        }
+        // }
         
         return dp[idx][amt] = res;
     }
