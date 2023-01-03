@@ -10,7 +10,6 @@ public:
                 res++;
             return;
         }
-            
         
         grid[x][y] = -1;
         
