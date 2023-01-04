@@ -11,21 +11,20 @@
  */
 class Solution {
 public:
-    int distributeCoins(TreeNode* root) {
-        int maxMoves = 0;
-        calculateMoves(root, maxMoves);
-        
-        return maxMoves;
-    }
-    
-    int calculateMoves(TreeNode* root, int &maxMoves){
+    int moveCoins(TreeNode* root, int &maxMoves){
         if(!root) return 0;
         
-        int left = calculateMoves(root->left, maxMoves);
-        int right = calculateMoves(root->right, maxMoves);
+        int left = moveCoins(root->left, maxMoves);
+        int right = moveCoins(root->right, maxMoves);
         
         maxMoves += abs(left) + abs(right);
         
         return root->val+left+right-1;
+    }
+    int distributeCoins(TreeNode* root) {
+        int maxMoves = 0;
+        moveCoins(root, maxMoves);
+        
+        return maxMoves;
     }
 };
