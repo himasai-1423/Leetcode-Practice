@@ -12,24 +12,18 @@
 class Solution {
 public:
     int ans=0;
-    unordered_map<long, int> mp;
-    void dfs(TreeNode* root, int target, long sum)
-    {
-        if(root)
-        {
-            sum+=root->val;
-            if(mp.find(sum-target)!=mp.end())
-                ans+=mp[sum-target];
-            mp[sum]++;
-            dfs(root->left, target, sum);
-            dfs(root->right, target, sum);
-            mp[sum]--;
+    int pathSum(TreeNode* root, long sum) {
+        if(root){
+            dfs(root,sum);
+            pathSum(root->left,sum);
+            pathSum(root->right,sum);
         }
-    }
-    int pathSum(TreeNode* root, int targetSum) {
-        ans=0;
-        mp[0]=1;
-        dfs(root, targetSum, 0);
         return ans;
+    }
+    void dfs(TreeNode* root, long sum){
+        if(!root)return;
+        if(root->val==sum)ans++;
+        dfs(root->left,sum-root->val);
+        dfs(root->right,sum-root->val);
     }
 };
