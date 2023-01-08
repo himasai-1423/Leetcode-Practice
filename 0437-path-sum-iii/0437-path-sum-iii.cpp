@@ -12,18 +12,21 @@
 class Solution {
 public:
     int ans=0;
-    int pathSum(TreeNode* root, long sum) {
+    int pathSum(TreeNode* root, long targetSum) {
         if(root){
-            dfs(root,sum);
-            pathSum(root->left,sum);
-            pathSum(root->right,sum);
+            dfs(root, targetSum);
+            pathSum(root->left, targetSum);
+            pathSum(root->right, targetSum);
         }
         return ans;
     }
-    void dfs(TreeNode* root, long sum){
-        if(!root)return;
-        if(root->val==sum)ans++;
-        dfs(root->left,sum-root->val);
-        dfs(root->right,sum-root->val);
+    
+    void dfs(TreeNode* root, long targetSum){
+        if(!root) return;
+        
+        if(root->val == targetSum) ans++;
+        
+        dfs(root->left, targetSum-root->val);
+        dfs(root->right, targetSum - root->val);
     }
 };
