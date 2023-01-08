@@ -14,10 +14,8 @@ class Solution
        vector<int> dp(W+1, 0);
        
        for(int i=1; i<=n; i++){
-           for(int w=W; w>=0; w--){
-               if(wt[i-1]<=w){
+           for(int w=W; w>=wt[i-1]; w--){
                    dp[w] = max(dp[w], dp[w-wt[i-1]]+val[i-1]);
-               }
            }
        }
        return dp[W];
