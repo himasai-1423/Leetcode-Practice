@@ -1,23 +1,20 @@
 class Solution {
 public:
     int numDecodings(string s) {
-        vector<int> memo(s.size(), -1);
-        return decodeWays(s, 0, memo);
-    }
-    
-    int decodeWays(string &s, int i, vector<int> &memo){
-        if(i==s.size()) return 1;
-        if(s[i] == '0') return 0;
-    
-        if(memo[i] != -1) return memo[i];
+        int n = s.size();
+        vector<int> dp(n+1);
         
-        int res;
+        dp[n] = 1;
         
-        res = decodeWays(s, i+1, memo);
-        
-        if(i<s.size()-1 &&(s[i]=='1' || (s[i]=='2' && s[i+1]<'7')))
-            res += decodeWays(s, i+2, memo);
-        
-        return memo[i] = res;
+        for(int i=n-1; i>=0; i--){
+            if(s[i]=='0') dp[i] = 0;
+            
+            else{
+                dp[i] = dp[i+1];
+                if(i<s.size()-1 &&(s[i]=='1' || (s[i]=='2' && s[i+1]<'7')))
+                    dp[i]+=dp[i+2];
+            }
+        }
+        return dp[0];
     }
 };
