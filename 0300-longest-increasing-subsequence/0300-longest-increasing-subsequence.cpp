@@ -1,27 +1,26 @@
 class Solution {
 public:
-    int dp[2510];
-    int findLIS(vector<int> &nums, int n){
-        int ans =1;
+    int LIS(vector<int> &nums, int idx, vector<int> &dp){
+        if(idx<0) return 0;
         
-        if(dp[n] != -1) return dp[n];
+        int ans = 1;
         
-        for(int i=0; i<n; i++){
-            if(nums[i]<nums[n]){
-                ans = max(ans, findLIS(nums, i)+1);
-            }
+        if(dp[idx]!=-1) return dp[idx];
+        
+        for(int i=idx-1; i>=0; i--){
+            if(nums[idx]>nums[i])
+                ans = max(ans, LIS(nums, i, dp)+1);
         }
-        return dp[n]= ans;
+        
+        return dp[idx] = ans;
     }
-    
-    
     int lengthOfLIS(vector<int>& nums) {
-        memset(dp, -1, sizeof(dp));
-        int ans = 0;
-        for(int i = 0; i<nums.size(); i++){
-            ans = max(ans, findLIS(nums, i));
-        }
+        int res = 0;
+        vector<int> dp(nums.size()+2, -1);
         
-        return ans;
+        for(int i=nums.size()-1; i>=0; i--){
+            res = max(res, LIS(nums, i, dp)); 
+        }
+        return res;
     }
 };
