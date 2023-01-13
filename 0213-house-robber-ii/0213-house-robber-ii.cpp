@@ -13,7 +13,7 @@ public:
     }
     int rob(vector<int>& nums) {
         if(nums.size()==1) return nums[0];
-        if(nums.size()==2) return max(nums[1], nums[0]);
+        //if(nums.size()==2) return max(nums[1], nums[0]);
         
         vector<int> dp(nums.size(), -1);
         vector<int> dp2(nums.size(), -1);
