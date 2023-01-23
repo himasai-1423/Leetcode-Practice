@@ -1,24 +1,15 @@
 class Solution {
 public:
-    vector<vector<int>> res;
-    
-    void generate(vector<int> &nums, int i, vector<int> &subarray){
-        if(i==nums.size()){
-            res.push_back(subarray);
-            return;
-        }
-        
-        generate(nums, i+1, subarray);
-        
-        subarray.push_back(nums[i]);
-        generate(nums, i+1, subarray);
-        subarray.pop_back();
-    }
-    
-    
     vector<vector<int>> subsets(vector<int>& nums) {
-        vector<int> subarray;
-        generate(nums, 0, subarray);
+        vector<vector<int>> res;
+        int maskSize = (1<<nums.size());
+        for(int mask=0; mask<maskSize; mask++){
+            vector<int> ans;
+            for(int i=0; i<nums.size(); i++)
+                if((mask & (1<<i))!=0)
+                    ans.push_back(nums[i]);
+            res.push_back(ans);
+        }
         return res;
     }
 };
