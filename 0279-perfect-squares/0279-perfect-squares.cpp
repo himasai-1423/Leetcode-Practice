@@ -1,20 +1,18 @@
 class Solution {
 public:
-    int findSquares(int n, vector<int> &dp){
-        if(n==0)
-            return 0;
-        
-        if(dp[n]!= -1) return dp[n];
-        
-        int res = INT_MAX;
-        for(int i=1; i*i<=n; i++){
-            res = min(res, 1+ findSquares(n-(i*i), dp));
-        }        
-        return dp[n]= res; 
-    }
     int numSquares(int n) {
-        vector<int> dp(n+1, -1);
+        vector<int> dp(n+1, INT_MAX-1);
+        dp[0] = 0;
+        int count =1;
         
-        return findSquares(n, dp);
+        while(count*count<=n){
+            int sq = count*count;
+            for(int i=sq; i<n+1; i++){
+                dp[i] = min(dp[i], dp[i-sq]+1);
+            }
+            
+            count++;
+        }
+        return dp[n];        
     }
 };
