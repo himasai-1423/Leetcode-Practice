@@ -2,13 +2,13 @@ class Solution {
 public:
     int subsetXORSum(vector<int>& nums) {
         int res=0;
-        int maskSize = (1<<nums.size());
-        for(int mask=0; mask<maskSize; mask++){
-            int ans=0;
-            for(int i=0; i<nums.size(); i++)
-                if((mask & (1<<i))!=0)
-                    ans ^= nums[i];
-            res += ans;
+        int n = (1<<nums.size());
+        for(int i=0; i<n; i++){
+            int XORsum = 0;
+            for(int j=0; j<nums.size(); j++)
+                if((i & (1<<j))!=0)
+                    XORsum ^= nums[j];
+            res+=XORsum;
         }
         return res;
     }
