@@ -2,8 +2,7 @@ class Solution {
 public:
     bool judgeSquareSum(int c) {
         long num;
-        
-        // if(c==0 || c==1) return true;
+
         
         for(long i=0; i*i<=c; i++){
             num = c-i*i;
