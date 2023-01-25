@@ -3,7 +3,8 @@ public:
     int maxNumberOfBalloons(string text) {
         unordered_map<char, int> m;
         for(int i=0; i<text.size(); i++){
-            m[text[i]]++;
+            if(text[i]=='b' || text[i]=='a' ||text[i]=='l' ||text[i]=='o' ||text[i]=='n' )
+                m[text[i]]++;
         }
         int res = 0;
         while(true){
