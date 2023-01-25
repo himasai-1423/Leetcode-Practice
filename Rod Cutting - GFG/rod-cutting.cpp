@@ -8,37 +8,37 @@ using namespace std;
 // } Driver Code Ends
 // User function Template for C++
 
-int dp[1010][1010];
-
 class Solution{
   public:
-    int cuttingRod(int price[], int length, int cutSize, int idx){
-        if(length<=0 || cutSize<=0|| idx<0) return 0;
+    int rodCut(int price[], int idx, int n, vector<vector<int>> &dp){
+        if(n<=0 || idx<0) return 0;
         
-        if(dp[idx][length] != -1) return dp[idx][length];
+        int ans;
         
-        int val = 0;
-        if(length-cutSize<0){
-            val = 0 + cuttingRod(price, length, cutSize-1, idx-1);
+        if(dp[n][idx] != -1) return dp[n][idx];
+        if(n-idx-1<0){
+            int withoutCutting = rodCut(price, idx-1, n, dp);
+            ans = withoutCutting;
         }
+        
         else{
-            int withCutting = price[idx] + cuttingRod(price, length-cutSize, cutSize, idx);
-            int withoutCutting = cuttingRod(price, length, cutSize-1, idx-1);
+            int withCutting = price[idx] + rodCut(price, idx, n-(idx+1), dp);
+            int withoutCutting = rodCut(price, idx-1, n, dp);
             
-            val = max(withCutting, withoutCutting);
+            ans = max(withCutting, withoutCutting);
         }
         
-        return dp[idx][length] = val;
+        return dp[n][idx]=ans;
     }
-  
     int cutRod(int price[], int n) {
-        memset(dp, -1, sizeof(dp));
-        int ans=0, maxi=INT_MIN;
+        //code here
+        vector<vector<int>> dp(n+5, vector<int>(n+5, -1));
+        int res = INT_MIN;
         for(int i=0; i<n; i++){
-            ans = cuttingRod(price, n, i+1, i);
-            maxi = max(maxi, ans);
+            res= max(res, rodCut(price, i, n, dp));
         }
-        return maxi;
+        
+        return res;
     }
 };
 
