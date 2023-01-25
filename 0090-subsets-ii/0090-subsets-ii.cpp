@@ -1,21 +1,23 @@
 class Solution {
 public:
-    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-        vector<vector<int>> res;
-        set<vector<int>> resCorrect;
-        sort(nums.begin(), nums.end());
-        int n = (1<<nums.size());
-        for(int mask=0; mask<n; mask++){
-            vector<int> ans;
-            for(int i=0; i<nums.size(); i++)
-                if((mask&(1<<i))!=0)
-                    ans.push_back(nums[i]);
-            resCorrect.insert(ans);
+    vector<vector<int>> res;
+    void generateSubsets(vector<int> &nums, vector<int> ans, int i, bool pre){
+        if(i==nums.size()){
+            res.push_back(ans);
+            return;
         }
+        generateSubsets(nums, ans, i+1, false);        
         
-        for(auto i: resCorrect){
-            res.push_back(i);
-        }
+        if(i>0 && nums[i]==nums[i-1] && !pre) return;
+        
+        ans.push_back(nums[i]);
+        generateSubsets(nums, ans, i+1, true);
+        ans.pop_back();
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<int> ans;
+        sort(begin(nums), nums.end());
+        generateSubsets(nums, ans, 0,  true);
         return res;
     }
 };
