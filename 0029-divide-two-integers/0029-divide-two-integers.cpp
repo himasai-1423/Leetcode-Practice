@@ -11,7 +11,7 @@ public:
         unsigned int res = 0;
         while(a>=b){
             int count=0;
-            while(a > (b<<(count+1)))
+            while(a > (b<<1<<count))
                 count++;
             res += (1<<count);
             a -= (b<<count);
