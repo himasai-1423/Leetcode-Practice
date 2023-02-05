@@ -15,7 +15,7 @@ public:
                     while (l + 1 < r && nums[l] == nums[l + 1])
                         ++l;
                     ++l;
-                    --r;
+                    // --r;
                 } else if (nums[l] + nums[r] > target) {
                     --r;
                 } else {
