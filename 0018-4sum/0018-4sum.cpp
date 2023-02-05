@@ -12,15 +12,15 @@ public:
                     res.push_back(path);
                     path.pop_back();
                     path.pop_back();
+                    
                     while (l + 1 < r && nums[l] == nums[l + 1])
-                        ++l;
-                    ++l;
-                    // --r;
-                } else if (nums[l] + nums[r] > target) {
-                    --r;
-                } else {
-                    ++l;
-                }
+                        l++;
+                    l++;
+                } 
+                else if (nums[l] + nums[r] > target) 
+                    r--;
+                else
+                    l++;
             }
         }
         while (l < r) {
@@ -28,8 +28,8 @@ public:
             findKElements(nums, target - nums[l], k-1, l+1, r);
             path.pop_back();
             while (l + 1 < r && nums[l] == nums[l + 1])
-                ++l;
-            ++l;
+                l++;
+            l++;
         }
     }
     
