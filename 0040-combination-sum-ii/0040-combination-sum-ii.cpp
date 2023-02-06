@@ -11,14 +11,15 @@ public:
         if(target<0 || idx==candidates.size())
             return;
         
-        arr.push_back(candidates[idx]);
-        findVals(candidates, idx+1, target-candidates[idx], arr);
-        arr.pop_back();
-        
-        int i = idx+1;
-        while(i<candidates.size() && candidates[i]==candidates[i-1]) i++;
-        
-        findVals(candidates, i, target, arr);
+        int prev = -1;
+        for(int i=idx; i<candidates.size(); i++){
+            if(prev == candidates[i])
+                continue;
+            arr.push_back(candidates[i]);
+            findVals(candidates, i+1, target-candidates[i], arr);
+            arr.pop_back();
+            prev = candidates[i];
+        }
     }
     
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
