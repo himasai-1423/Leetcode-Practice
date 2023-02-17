@@ -11,16 +11,19 @@
  */
 class Solution {
 public:
-    int min_dif = INT_MAX, val = -1;  
-    
+    int min_diff = INT_MAX, val = -1; 
     int minDiffInBST(TreeNode* root) {
-        if (root->left != NULL) 
+        if(root->left)
             minDiffInBST(root->left);
-        if (val >= 0) 
-            min_dif = min(min_dif, root->val - val);
+        
+        if(val>=0)
+            min_diff = min(min_diff, root->val-val);
+        
         val = root->val;
-        if (root->right != NULL) 
+        
+        if(root->right)
             minDiffInBST(root->right);
-        return min_dif;
+        
+        return min_diff;
     }
 };
