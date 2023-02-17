@@ -8,15 +8,11 @@ public:
         
         for(int i=2; i<n; i++){
             if(check[i]){
+                res++;
                 for(int j = 2*i; j<n; j+=i)
                     check[j]=false;
             }
-        }
-        
-        for(int i=2; i<n; i++)
-            if(check[i])
-                res++;
-        
+        }        
         
         return res;
     }
