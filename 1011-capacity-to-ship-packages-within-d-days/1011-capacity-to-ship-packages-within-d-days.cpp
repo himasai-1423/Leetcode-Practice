@@ -1,34 +1,36 @@
 class Solution {
 public:
-    bool feasible(vector<int>& weights, int c, int days) {
-        int daysNeeded = 1, currentLoad = 0;
-        for (int weight : weights) {
-            currentLoad += weight;
-            if (currentLoad > c) {
-                daysNeeded++;
-                currentLoad = weight;
+    bool checkPossibility(vector<int> &weights, int curWeight, int days) {
+        int curDays = 1, shippedWeight = 0;
+        
+        for (int i: weights) {
+            shippedWeight += i;
+            
+            if(shippedWeight>curWeight) {
+                curDays++;
+                shippedWeight = i;
             }
         }
-
-        return daysNeeded <= days;
+        return curDays<=days;
     }
-
+    
     int shipWithinDays(vector<int>& weights, int days) {
-        int totalLoad = 0, maxLoad = 0;
-        for (int weight : weights) {
-            totalLoad += weight;
-            maxLoad = max(maxLoad, weight);
+        int maxWeight = 0, totalWeight=0;
+        
+        for (int i : weights) {
+            totalWeight += i;
+            maxWeight = max(maxWeight, i);
         }
-
-        int l = maxLoad, r = totalLoad;
-
-        while (l < r) {
-            int mid = (l + r) / 2;
-            if (feasible(weights, mid, days)) {
-                r = mid;
-            } else {
-                l = mid + 1;
-            }
+        
+        int l = maxWeight, r = totalWeight;
+        while (l<r) {
+            int cur = l+(r-l)/2;
+            
+            if(checkPossibility(weights, cur, days))
+                r = cur;
+            
+            else
+                l = cur+1;
         }
         return l;
     }
