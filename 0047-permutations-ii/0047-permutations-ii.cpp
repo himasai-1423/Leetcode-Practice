@@ -12,6 +12,8 @@ public:
             swap(nums[i], nums[idx]);
             swapPermute(nums, idx+1);
         }
+        
+        //Restore original State
         for (int i = nums.size() - 1; i > idx; --i) {
                 swap(nums[idx], nums[i]);
         }
