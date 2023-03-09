@@ -1,21 +1,21 @@
 class Solution {
 public:
-    void swapPermute(vector<int> &nums, vector<vector<int>> &res, int ind){
-        if(ind>=nums.size()){
+    vector<vector<int>> res;
+    void swapPermute(vector<int> &nums, int idx){
+        if(idx>=nums.size()){
             res.push_back(nums);
             return;
         }
         
-        for(int i=ind; i<nums.size(); i++){
-            swap(nums[ind], nums[i]);
-            swapPermute(nums, res, ind+1);
-            swap(nums[ind], nums[i]);
+        for(int i=idx; i<nums.size(); i++){
+            swap(nums[idx], nums[i]);
+            swapPermute(nums, idx+1);
+            swap(nums[i], nums[idx]);
         }
     }
     
     vector<vector<int>> permute(vector<int> &nums) {
-        vector<vector<int>> res;
-        swapPermute(nums, res, 0);
+        swapPermute(nums, 0);
         return res;
     }
 };
