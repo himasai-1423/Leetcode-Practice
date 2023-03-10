@@ -1,28 +1,26 @@
 class Solution {
-public:    
-    int countCoins(vector<int> &coins, int idx, int amount, vector<vector<int>> &dp) {
-        if(amount == 0) 
-            return 0;
+public:
+    int dp[12 + 1][10000 + 1];
+    int change(vector<int> &coins,int idx, int amt){
+        if(amt == 0) return 0;
+        else if(idx<0 || amt<0) return INT_MAX-1;
         
-        if(amount<0 || idx<0) return INT_MAX-1;
-        
-        if(dp[idx][amount] != -1) return dp[idx][amount];
-        
-        int ans=-1;
-        
-        int takeCoin = countCoins(coins, idx, amount-coins[idx], dp)+1;
-        int leaveCoin = countCoins(coins, idx-1, amount, dp);
-            
-        ans = min(takeCoin, leaveCoin);
-        
+        if(dp[idx][amt]!= -1) return dp[idx][amt];
                 
-        return dp[idx][amount]=ans;
+        int res = -1;
+        int takeCoin = 1 + change(coins, idx, amt - coins[idx]);
+        int doNotTakeCoin = 0 + change(coins, idx - 1, amt - 0);
+        
+        res = min(takeCoin, doNotTakeCoin);
+        
+        return dp[idx][amt] = res;
     }
     
     int coinChange(vector<int>& coins, int amount) {
-        vector<vector<int>> dp(coins.size(), vector<int>(amount+1, -1));
-        int res = countCoins(coins, coins.size()-1, amount, dp);
+        int n = coins.size();
+        memset(dp, -1, sizeof(dp));
+        int ans = change(coins,n-1 , amount);
         
-        return res==INT_MAX-1?-1:res;
+        return (ans==INT_MAX-1)?-1:ans;
     }
 };
