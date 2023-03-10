@@ -1,26 +1,20 @@
 class Solution {
 public:
-    int dp[12 + 1][10000 + 1];
-    int change(vector<int> &coins,int idx, int amt){
-        if(amt == 0) return 0;
-        else if(idx<0 || amt<0) return INT_MAX-1;
-        
-        if(dp[idx][amt]!= -1) return dp[idx][amt];
-                
-        int res = -1;
-        int takeCoin = 1 + change(coins, idx, amt - coins[idx]);
-        int doNotTakeCoin = 0 + change(coins, idx - 1, amt - 0);
-        
-        res = min(takeCoin, doNotTakeCoin);
-        
-        return dp[idx][amt] = res;
-    }
-    
     int coinChange(vector<int>& coins, int amount) {
-        int n = coins.size();
-        memset(dp, -1, sizeof(dp));
-        int ans = change(coins,n-1 , amount);
+        vector<vector<int>> dp(coins.size()+1, vector<int>(amount+1, INT_MAX-1));
         
-        return (ans==INT_MAX-1)?-1:ans;
+        for(int i=0; i<=coins.size(); i++) 
+            dp[i][0] = 0;
+        
+        for(int i=1; i<=coins.size(); i++) {
+            for(int j=1; j<=amount; j++) {
+                if(j<coins[i-1])
+                    dp[i][j] = dp[i-1][j];
+                
+                else 
+                    dp[i][j] = min(dp[i-1][j], dp[i][j-coins[i-1]]+1);
+            }
+        }
+        return dp[coins.size()][amount]>=INT_MAX-1?-1:dp[coins.size()][amount];
     }
 };
