@@ -21,26 +21,25 @@
  */
 class Solution {
 public:
-    TreeNode* buildBST(ListNode* head, ListNode* tail){
-        if(head == tail) return NULL;
+    TreeNode* buildBST(ListNode* head, ListNode* tail) {
+        if(head==tail) return NULL;
         
-        if(head->next == tail){
+        if(head->next==tail) {
             TreeNode* node = new TreeNode(head->val);
             return node;
         }
         
-        ListNode* mid = head, *midFinder = head;
+        ListNode* slow = head, *fast = head;
         
-        while(midFinder != tail && midFinder->next != tail){
-            mid = mid->next;
-            midFinder = midFinder->next->next;
+        while(fast!=tail && fast->next!=tail) {
+            slow = slow->next;
+            fast = fast->next->next;
         }
+        TreeNode* node = new TreeNode(slow->val);
+        node->left = buildBST(head, slow);
+        node->right = buildBST(slow->next, tail);
         
-        TreeNode* node = new TreeNode(mid->val);
-        
-        node->left = buildBST(head, mid);
-        node->right = buildBST(mid->next, tail);
-        return node;        
+        return node;
     }
     TreeNode* sortedListToBST(ListNode* head) {
         return buildBST(head, NULL);
