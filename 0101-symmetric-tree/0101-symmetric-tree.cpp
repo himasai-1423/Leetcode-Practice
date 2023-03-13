@@ -11,18 +11,17 @@
  */
 class Solution {
 public:
-    bool checkSymmetric(TreeNode* left, TreeNode* right){
-        if(!left && !right) return true;
-        if(!left || !right) return false;
+    bool checkTree(TreeNode* left1, TreeNode* right1) {
+        if(!left1 && !right1) return true;
+        if(!left1 || !right1) return false;
         
-        if(left->val != right->val) return false;
-                      
-        return  checkSymmetric(left->left, right->right) && checkSymmetric(left->right, right->left) ;
+        if(left1->val != right1->val) return false;
+        
+        return checkTree(left1->right, right1->left) 
+            && checkTree(left1->left, right1->right);
     }
     
-    bool isSymmetric(TreeNode* root) {
-        if(!root) return true;
-        
-        return checkSymmetric(root->left, root->right);
+    bool isSymmetric(TreeNode* root) { 
+        return checkTree(root->left, root->right);
     }
 };
