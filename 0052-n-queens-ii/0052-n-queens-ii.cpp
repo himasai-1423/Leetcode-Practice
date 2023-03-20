@@ -3,13 +3,13 @@ public:
     int cnt = 0;
     unordered_set<int> col, posDig, negDig;
     
-    void arrangeQueens(vector<string> &board, int row) {
-        if(row==board.size()) {
+    void arrangeQueens(int n, int row) {
+        if(row==n) {
             cnt++;
             return;
         }
         
-        for(int c=0; c<board.size(); c++) {
+        for(int c=0; c<n; c++) {
             if(col.count(c) || posDig.count(row+c) || negDig.count(row-c))
                 continue;
             
@@ -17,7 +17,7 @@ public:
             posDig.insert(row+c);
             negDig.insert(row-c);
             
-            arrangeQueens(board, row+1);
+            arrangeQueens(n, row+1);
             
             col.erase(c);
             posDig.erase(row+c);
@@ -26,8 +26,7 @@ public:
     }
     
     int totalNQueens(int n) {
-        vector<string> board(n, string(n, '.'));
-        arrangeQueens(board, 0);
+        arrangeQueens(n, 0);
         return cnt;
     }
 };
