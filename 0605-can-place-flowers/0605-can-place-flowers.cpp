@@ -11,6 +11,9 @@ public:
                 if(leftCheck and rightCheck) {
                     flowerbed[i] = 1;
                     cnt++;
+                    if(n<=cnt) {
+                        return true;
+                    }
                 }  
             }
         }
