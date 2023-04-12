@@ -10,8 +10,9 @@ public:
             i++;
         }
         
+        const int maxLimit = INT_MAX / 10;
         while(i<s.size() && (s[i]>='0' && s[i]<='9')) {
-             if(res> (INT_MAX / 10) || (res == (INT_MAX / 10) &&  s[i] - '0' > 7))
+             if(res>maxLimit || (res == maxLimit &&  s[i] - '0' > 7))
                 return sign>0?INT_MAX:INT_MIN;
             res = res*10 + (s[i] - '0');
             i++;
