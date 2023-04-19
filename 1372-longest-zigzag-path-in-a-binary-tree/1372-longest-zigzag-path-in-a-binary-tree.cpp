@@ -9,38 +9,28 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-
-class Pair {
-public:
-    int forwardSlash = -1;
-    int backwardSlash = -1;
-    int maxZZ = 0;
-};
-
 class Solution {
 public:
-    Pair findZigZag(TreeNode* root){
-        if(!root) {
-            Pair nodeAns;
-            return nodeAns;
+    int maxLen = 0;
+    void dfs(TreeNode*node, bool goLeft, int steps) {
+        if(!node) return;
+        
+        maxLen = max(maxLen, steps);
+        
+        if(goLeft) {
+            dfs(node->left, false, steps+1);
+            dfs(node->right, true, 1);
         }
-        
-        Pair left = findZigZag(root->left);
-        Pair right = findZigZag(root->right);
-        
-        Pair nodeAns;
-        
-        nodeAns.maxZZ = max(max(left.maxZZ, right.maxZZ) ,max(left.backwardSlash, right.forwardSlash)+1);
-        nodeAns.forwardSlash = left.backwardSlash +1;
-        nodeAns.backwardSlash = right.forwardSlash +1;
-        
-        return nodeAns;
+        else {
+            dfs(node->left, false, 1);
+            dfs(node->right, true, steps+1);
+        }
     }
     
-    
     int longestZigZag(TreeNode* root) {
-        Pair maxi = findZigZag(root);
+        dfs(root, false, 0);
+        dfs(root, true, 0);
         
-        return maxi.maxZZ;
+        return maxLen;
     }
 };
