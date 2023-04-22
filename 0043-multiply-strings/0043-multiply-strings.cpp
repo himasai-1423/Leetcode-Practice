@@ -1,21 +1,30 @@
 class Solution {
 public:
     string multiply(string num1, string num2) {
-        if (num1 == "0" || num2 == "0") 
-            return "0";
-
-        string res(num1.size()+num2.size(), '0');        
-        for(int i = num1.size()-1; i>=0; i--) {
-            for(int j = num2.size()-1; j>=0; j--) {
+        int n = num1.size(), m = num2.size();
+        vector<int> res(n+m, 0);
+        string ans="";
+        
+        reverse(num1.begin(), num1.end());
+        reverse(num2.begin(), num2.end());
+        
+        for(int i=0; i<n; i++) {
+            for(int j=0; j<m; j++) {
                 int a = num1[i]-'0';
                 int b = num2[j]-'0', c;
-                c = (res[i+j+1]-'0')+a*b;
+                c = res[i+j]+a*b;
                 
-                res[i+j+1] = c%10 + '0';
-                res[i+j] += c/10;
+                res[i+j] = c%10;
+                res[i+j+1] += c/10;
             }
         }
-        if(res[0] == '0') return res.substr(1);
-        return res;
+        reverse(res.begin(), res.end());
+        
+        for(int i=0; i<res.size(); i++) {
+            if(ans=="" && res[i]==0) continue;
+
+            ans += (res[i]+'0');
+        }
+        return ans==""?"0":ans;
     }
 };
