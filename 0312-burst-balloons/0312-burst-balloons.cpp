@@ -9,7 +9,16 @@ public:
             arr.push_back(nums[i]);
         arr.push_back(1);
         
-        return dfs(arr, 1, arr.size()-2, dp);        
+        int res = dfs(arr, 1, arr.size()-2, dp);
+        
+        for(int i = 0; i<dp.size(); i++){
+            for(int j= 0; j<dp[0].size(); j++){
+                cout<<dp[i][j]<<" ";
+            }
+            cout<<endl;
+        }
+        
+        return res;   
     }
     
     int dfs(vector<int> &arr, int l, int r, vector<vector<int>> &dp){
