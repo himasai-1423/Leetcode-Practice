@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int dfs(int i, int j, vector<vector<bool>> &vis, vector<vector<int>> &grid) {
+    bool dfs(int i, int j, vector<vector<bool>> &vis, vector<vector<int>> &grid) {
         int n = grid.size();
         int m = grid[0].size();
         if(i<0 || j<0 || i>=n || j>=m)
