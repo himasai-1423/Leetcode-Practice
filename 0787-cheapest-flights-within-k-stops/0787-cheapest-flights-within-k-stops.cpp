@@ -1,7 +1,7 @@
 class Solution {
 public:
     int INF = 1e9+10;
-    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+    int bellmanFord(int n, vector<vector<int>>& flights, int src, int dst, int k) {
         vector<int> dist(n, INF);
         dist[src] = 0;
         
@@ -14,5 +14,9 @@ public:
             dist = temp;
         }
         return dist[dst] == INF ? -1 :  dist[dst];
+    }
+    
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {     
+        return bellmanFord(n, flights, src, dst, k);
     }
 };
