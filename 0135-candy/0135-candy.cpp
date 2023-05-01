@@ -10,9 +10,8 @@ public:
         
         int res = candies[candies.size()-1];
         for(int i=ratings.size()-2; i>=0; i--) {
-            if(ratings[i+1]<ratings[i]) {
+            if(ratings[i+1]<ratings[i]) 
                 candies[i] = max(candies[i], candies[i+1] + 1);
-            }
             
             res += candies[i];
         }
