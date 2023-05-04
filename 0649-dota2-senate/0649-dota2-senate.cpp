@@ -1,24 +1,23 @@
 class Solution {
 public:
     string predictPartyVictory(string senate) {
-        queue<int> rq, dq;
+        queue<int> rQ, sQ;
         
-        for(int i=0; i<senate.size(); i++)
-            senate[i] == 'R' ? rq.push(i): dq.push(i);
+        for(int i=0; i<senate.size(); i++) 
+            senate[i]=='R'?rQ.push(i):sQ.push(i);
         
-        int a, b;
-        while(!rq.empty() and !dq.empty()){
-            a = rq.front(), b = dq.front();
-            rq.pop(), dq.pop();
-            if (a < b) // taking min and pushing it to queue again
-                rq.push(a+senate.size());
+        while(!rQ.empty() && !sQ.empty()) {
+            int a = rQ.front(), b = sQ.front();
+            rQ.pop();
+            sQ.pop();
+            if(a<b)
+                rQ.push(a+senate.size());
             else
-                dq.push(b+senate.size());
+                sQ.push(b+senate.size());
         }
         
-		if (rq.size() > dq.size())
-			return "Radiant";
-		else
-			return "Dire";
+        if(rQ.size()>sQ.size())
+            return "Radiant";
+        return "Dire";
     }
 };
