@@ -1,37 +1,52 @@
 class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
-        int n=matrix.size();
-        int m=matrix[0].size();
-        int left=0,right=m-1,bottom=n-1,top=0;
-        int direction=1;
-        vector<int> v;
+        int m = matrix.size(), n = matrix[0].size();
+        vector<int> res;
         
-        while(left<=right && top<=bottom) {
-            if(direction==1) {
-                for(int i=left;i<=right;i++) v.push_back(matrix[top][i]);
-                direction=2;
-                top++;
-            }
-            
-            else if(direction==2) {
-                for(int i=top;i<=bottom;i++) v.push_back(matrix[i][right]);
-                direction=3;
-                right--;
-            }
-            
-            else if(direction==3) {
-                for(int i=right;i>=left;i--) v.push_back(matrix[bottom][i]);
-                direction=4;
-                bottom--;
-            }
-            
-            else if(direction==4) {
-                for(int i=bottom;i>=top;i--) v.push_back(matrix[i][left]);
-                direction=1;
-                left++;
-            }
+        int dir = 1, right = n-1, left = 0, up = 0, down = m-1;
+        
+       while(left<=right && up<=down) {
+           if(dir == 1) {
+               int i = left;
+               while(i<=right) {
+                   res.push_back(matrix[up][i]);
+                   i++;
+               }
+               up++;
+               dir = 2;
+           }
+           
+           else if(dir == 2) {
+               int i = up;
+               while(i<=down) {
+                   res.push_back(matrix[i][right]);
+                   i++;
+               }
+               right--;
+               dir = 3;
+           }
+           
+           else if(dir == 3) {
+               int i = right;
+               while(i>=left) {
+                   res.push_back(matrix[down][i]);
+                   i--;
+               }
+               down--;
+               dir = 4;
+           }
+           
+           else {
+               int i = down;
+               while(i>=up) {
+                   res.push_back(matrix[i][left]);
+                   i--;
+               }
+               left++;
+               dir = 1;
+           }
         }
-        return v;
+        return res;
     }
 };
