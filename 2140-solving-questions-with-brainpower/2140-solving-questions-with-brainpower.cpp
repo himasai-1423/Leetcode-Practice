@@ -1,21 +1,18 @@
 class Solution {
 public:
-    long long dfs(int idx, vector<vector<int>>& questions, vector<long long>& dp) {
-        if(idx>=questions.size())
-            return 0;
-        
-        if(dp[idx]!=0)
-            return dp[idx];
-        
-        long long points = questions[idx][0];
-        int skip = questions[idx][1];
-        
-        dp[idx] = max((points + dfs(idx+skip+1, questions, dp)), dfs(idx+1, questions, dp));
-        return dp[idx];
-    }
     long long mostPoints(vector<vector<int>>& questions) {
         vector<long long> dp(questions.size(), 0);
-        
-        return dfs(0, questions, dp);
+        int n = questions.size();
+        dp[n-1] = questions[n-1][0];
+        for(int i = n-2; i>=0; i--) {
+            dp[i] = questions[i][0];
+            int skip = questions[i][1];
+            
+            if(i+skip+1<n)
+                dp[i] += dp[i+skip+1];
+            
+            dp[i] = max(dp[i], dp[i+1]);
+        }
+        return dp[0];
     }
 };
