@@ -3,12 +3,21 @@
  * @return { increment: Function, decrement: Function, reset: Function }
  */
 var createCounter = function(init) {
-    var temp = init;
-    return {
-        increment: () => ++temp,
-        decrement: () => --temp,
-        reset: () => (temp=init),
-    }
+    let temp = init;
+    return new Proxy({}, {
+        get: (target, key) => {
+            switch(key) {
+                case "increment":
+                    return () => ++temp;
+                case "decrement":
+                    return () => --temp;
+                case "reset":
+                    return () => (temp = init);
+                default:
+                    throw Error("Wrong Method")
+            }
+        },
+    });
 };
 
 /**
