@@ -11,25 +11,20 @@
  */
 class Solution {
 public:
-    void compareTree(TreeNode* p, TreeNode* q, bool &res){
-        if(!p && !q) return;
+    bool res = true;
+    bool check(TreeNode* p, TreeNode *q) {
+        if(!p && !q) return true;
         
-        if(!p || !q){
-            res = false;
-            return;
-        }
+        if(!p || !q) return false;
         
-        if(p->val != q->val) res = false;
+        if(p->val!= q->val) return false;
         
-        compareTree(p->left, q->left, res);
-        compareTree(p->right, q->right, res);
-        
-        return;
+        return check(p->right, q->right) && check(p->left, q->left);
     }
     
     bool isSameTree(TreeNode* p, TreeNode* q) {
-        bool res=true;
-        compareTree(p, q, res);
-        return res;
+        if(!p && !q) return true;
+        
+        return check(p, q);
     }
 };
