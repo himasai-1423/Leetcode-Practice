@@ -28,9 +28,7 @@ public:
                 l++;
             }
         }
-        if(resLen==INT_MAX)
-            return "";
         
-        return s.substr(resDim.first, resLen);
+        return (resLen==INT_MAX)?"":s.substr(resDim.first, resLen);
     }
 };
