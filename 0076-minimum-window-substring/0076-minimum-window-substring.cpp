@@ -4,7 +4,7 @@ public:
         if(t=="") return "";
         unordered_map<char, int> countT, countS;
         
-        for(auto i: t)
+        for(auto &i: t)
             countT[i]++;
         
         int resLen = INT_MAX, l = 0, have = 0, need = countT.size();
