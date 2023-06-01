@@ -13,7 +13,6 @@ public:
         q.push({0, 0});
         vis[0][0] = true;
         
-        
         while(!q.empty()) {
             int n = q.size();
             while(n--) {
@@ -26,7 +25,6 @@ public:
                         if(grid[x][y]==0 && vis[x][y]==false) {
                             if(x == grid.size()-1 && y == grid.size()-1)
                                 return dist+1;
-                            cout<<x<<" "<<y<<" "<<dist<<endl;
                             q.push({x, y});
                             vis[x][y] = true;
                         }
