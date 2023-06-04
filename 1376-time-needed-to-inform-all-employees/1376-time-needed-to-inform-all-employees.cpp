@@ -1,23 +1,31 @@
 class Solution {
 public:
-    int maxTime = INT_MIN;
-    
-    void DFS(vector<int> adjList[], vector<int>& informTime, int curr, int time) {
-        maxTime = max(maxTime, time);
-        
-        for (int adjacent : adjList[curr]) { 
-            DFS(adjList, informTime, adjacent, time + informTime[curr]);
-        }
-    }
     int numOfMinutes(int n, int headID, vector<int>& manager, vector<int>& informTime) {
-        vector<int> adjList[n];
-        for (int i = 0; i < n; i++) {
-            if (manager[i] != -1) {
-                adjList[manager[i]].push_back(i);
+        vector<int> adj[n];
+        for(int i=0; i<n; i++) {
+            if(manager[i]==-1) continue;
+            adj[manager[i]].push_back(i);
+        }
+        
+        int res = informTime[headID];
+        queue<pair<int, int>> q;
+        q.push({headID, res}); //node, dist
+        while(!q.empty()) {
+            int n = q.size();
+            while(n--) {
+                auto node = q.front();
+                q.pop();
+                
+                for(auto &child: adj[node.first]) {
+                    if(child!=node.first) {
+                        int reachTime = informTime[child] + node.second;
+                        res = max(res, reachTime);
+                        q.push({child, reachTime});
+                    }
+                }
+                
             }
         }
-        
-        DFS(adjList, informTime, headID, 0);
-        return maxTime;
+        return res;
     }
 };
