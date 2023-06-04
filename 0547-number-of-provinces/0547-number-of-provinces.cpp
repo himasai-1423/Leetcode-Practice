@@ -6,12 +6,12 @@ public:
         for(int i=0; i<isConnected.size(); i++) 
             if(isConnected[node][i] && !vis[i])
                 dfs(i, vis, isConnected);
-        
     }
     
     int findCircleNum(vector<vector<int>>& isConnected) {
-        vector<bool> vis(isConnected.size(), false);
-        int cnt=0;
+        vector<bool> vis(isConnected.size());
+        int cnt = 0;
+        
         for(int i=0; i<isConnected.size(); i++) {
             if(!vis[i]) {
                 cnt++;
