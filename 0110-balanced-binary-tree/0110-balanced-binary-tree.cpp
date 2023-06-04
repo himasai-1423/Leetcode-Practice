@@ -11,22 +11,22 @@
  */
 class Solution {
 public:
-    int checkHeight(TreeNode* root, bool &res){
+    int dfs(TreeNode* root, bool &res) {
         if(!root) return 0;
-        int lHeight = checkHeight(root->left, res);
-        int rHeight = checkHeight(root->right, res);
         
-        if(abs(lHeight-rHeight)>1){
+        int leftHeight = dfs(root->left, res);
+        int rightHeight = dfs(root->right, res);
+        
+        if(abs(leftHeight-rightHeight)>1)
             res = false;
-            cout<<res<<endl;
-        } 
         
-        return max(lHeight, rHeight) + 1;
+        return max(leftHeight, rightHeight) + 1;
     }
     
     bool isBalanced(TreeNode* root) {
+        if(!root) return true;
         bool res = true;
-        checkHeight(root, res);
+        dfs(root, res);
         return res;
     }
 };
