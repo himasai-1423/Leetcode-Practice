@@ -12,25 +12,21 @@
 class Solution {
 public:
     TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
-        int rootIdx = postorder.size()-1;
-        return treeBuilder(inorder, postorder, 0, inorder.size()-1, rootIdx);
+        int rootNode = postorder.size()-1;
+        return treeBuilder(inorder, postorder, rootNode, 0, rootNode);
     }
     
-    TreeNode* treeBuilder(vector<int>& inorder, vector<int>& postorder, int left, 
-                          int right, int &rootIdx) {
-        if(left>right)
-            return NULL;
+    TreeNode* treeBuilder(vector<int>& inorder, vector<int>& postorder, int &rootIndex, int l, int r) {
+        if(l>r) return NULL;
         
-        int pivot = left;
+        int pivot = l;
+        while(postorder[rootIndex] != inorder[pivot]) pivot++;
         
-        while(inorder[pivot] != postorder[rootIdx]) pivot++;
+        TreeNode* node = new TreeNode(inorder[pivot]);
+        rootIndex--;
         
-        TreeNode* node = new TreeNode(postorder[rootIdx]);
-        rootIdx--;
-        
-        node->right = treeBuilder(inorder, postorder, pivot+1, right, rootIdx);
-        node->left = treeBuilder(inorder, postorder, left, pivot-1, rootIdx);
-        
+        node->right = treeBuilder(inorder, postorder, rootIndex, pivot+1, r);
+        node->left = treeBuilder(inorder, postorder, rootIndex, l, pivot-1);
         
         return node;
     }
