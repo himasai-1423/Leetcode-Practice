@@ -9,20 +9,23 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution
-{
-public:
+class Solution {
+private:
     int idx = 0;
-    TreeNode *bstFromPreorder(vector<int> &preorder, int parent_value = INT_MAX){
-        if(idx==preorder.size() || preorder[idx]>parent_value)
+    TreeNode* treeBuilder(vector<int>& preorder, int parVal) {
+        if(idx>=preorder.size() || preorder[idx]>parVal) 
             return NULL;
-        int curr_val = preorder[idx];
-        TreeNode* node = new TreeNode(curr_val);
-        idx++;
         
-        node->left = bstFromPreorder(preorder, curr_val);
-        node->right = bstFromPreorder(preorder, parent_value);
+        TreeNode *node = new TreeNode(preorder[idx]);
+        idx++;
+        node->left = treeBuilder(preorder, node->val);
+        node->right = treeBuilder(preorder, parVal);
         
         return node;
+    }
+    
+public:
+    TreeNode* bstFromPreorder(vector<int>& preorder) {
+        return treeBuilder(preorder, INT_MAX);
     }
 };
