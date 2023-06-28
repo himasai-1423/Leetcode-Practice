@@ -8,7 +8,7 @@ public:
             int a = i + move.first;
             int b = j + move.second;
             
-            if(a>=0 && b>=0 && a<grid.size() && b<grid[0].size() && grid[a][b]==grid[i][j] && !(x == a && y == b))
+            if(a>=0 && b>=0 && a<grid.size() && b<grid[0].size() && grid[a][b]==grid[i][j] && (x!=a || y!=b))
                if(vis[a][b] || dfs(a, b, i, j, vis, grid))
                    return true;
         }
