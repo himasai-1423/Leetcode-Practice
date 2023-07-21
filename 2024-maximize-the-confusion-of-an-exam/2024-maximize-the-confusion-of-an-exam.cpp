@@ -10,7 +10,6 @@ public:
                     l++;
                 }
             }
-            
             res = max(res, i-l+1);
         }
         return res;
