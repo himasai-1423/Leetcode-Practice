@@ -14,17 +14,17 @@ public:
     int dfs(TreeNode* root, bool &res) {
         if(!root) return 0;
         
-        int leftHeight = dfs(root->left, res);
-        int rightHeight = dfs(root->right, res);
+        int left = dfs(root->left, res);
+        int right = dfs(root->right, res);
         
-        if(abs(leftHeight-rightHeight)>1)
+        if(abs(left-right)>1)
             res = false;
         
-        return max(leftHeight, rightHeight) + 1;
+        return max(left, right) + 1;
     }
-    
     bool isBalanced(TreeNode* root) {
         if(!root) return true;
+        
         bool res = true;
         dfs(root, res);
         return res;
