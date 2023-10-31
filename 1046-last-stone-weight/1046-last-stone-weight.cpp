@@ -9,12 +9,10 @@ public:
         while(q.size()>1) {
             int last = q.top();
             q.pop();
-            int lastSecond = q.top();
+            int newLast = q.top();
             q.pop();
-            
-            q.push(last-lastSecond);
+            q.push(last-newLast);
         }
-        
-        return q.size()==0?0:q.top();
+        return q.top();
     }
 };
