@@ -13,26 +13,27 @@ public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         ListNode *dummy = new ListNode();
         ListNode *curr = dummy;
-
+        
         int carry = 0;
-        while(l1 || l2 || carry){ 
+        while(l1 || l2 || carry) {
             int sum =0;
-            
-            if(l1){
-                sum+=l1->val;
+            if(l1) {
+                sum += l1->val;
                 l1 = l1->next;
             }
             
-            if(l2){
-                sum+= l2->val;
-                l2=l2->next;
+            if(l2) {
+                sum += l2->val;
+                l2 = l2->next;
             }
             
-            sum+=carry;
-            ListNode* newNode = new ListNode(sum%10);           
+            if(carry) {
+                sum += carry;
+            }
+            ListNode *node = new ListNode(sum%10);
             carry = sum/10;
             
-            curr->next = newNode;
+            curr->next = node;
             curr = curr->next;
         }
         return dummy->next;
