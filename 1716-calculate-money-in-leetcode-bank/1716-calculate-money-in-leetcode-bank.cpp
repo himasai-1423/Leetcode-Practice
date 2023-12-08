@@ -1,22 +1,17 @@
 class Solution {
 public:
-    int nDaysSum(int val) {
-        return (val+1)*val/2;
-    }
-    
-    int totalMoney(int n) {        
-        int quotient = n/7;
-        int reminder = n%7;
+    int totalMoney(int n) {
+        int k = n/7;
+        int F = 28;
+        int L = 28 + (k-1)*7;
+        int arithmeticSum = k * (F + L) / 2;
         
-        int res = 0, i = 0;
-        
-        for(i=0; i<quotient; i++) {
-            res += (i*7) + nDaysSum(7);
+        int monday = 1 + k;
+        int finalWeek = 0;
+        for (int day = 0; day < n % 7; day++) {
+            finalWeek += monday + day;
         }
         
-        if(reminder != 0)
-            res += (i*reminder) + nDaysSum(reminder);
-        
-        return res;
+        return arithmeticSum + finalWeek; 
     }
 };
