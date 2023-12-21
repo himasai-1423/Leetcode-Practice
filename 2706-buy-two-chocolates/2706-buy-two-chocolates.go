@@ -1,8 +1,18 @@
 func buyChoco(prices []int, money int) int {
-    sort.Ints(prices)
+    firstMin, secondMin := math.MaxInt, math.MaxInt
     
-    if money-prices[0]-prices[1]<0 {
+    for _,price := range prices {
+        if firstMin>price {
+            secondMin = firstMin
+            firstMin = price
+        } else if secondMin>price {
+            secondMin = price
+        }
+    }
+    
+    if money-firstMin-secondMin<0 {
         return money
     }
-    return money-prices[0]-prices[1]
+    
+    return money-firstMin-secondMin
 }
