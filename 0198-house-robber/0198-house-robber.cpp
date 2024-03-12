@@ -13,6 +13,6 @@ public:
     
     int rob(vector<int>& nums) {
         vector<int> dp(nums.size(), -1);
-        return max(houseRobber(0, nums, dp), houseRobber(1, nums, dp));
+        return houseRobber(0, nums, dp);
     }
 };
