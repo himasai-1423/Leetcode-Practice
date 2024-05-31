@@ -4,7 +4,7 @@ public:
         if(s.size() != goal.size()) return false;
         
         for(int i=0; i<s.size(); i++) {
-            int front_char = s[0];
+            char front_char = s[0];
             s = s.substr(1);
             s += front_char;
             if(s == goal) {
