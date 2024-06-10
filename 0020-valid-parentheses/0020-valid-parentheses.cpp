@@ -6,13 +6,13 @@ public:
         stack<char> st;
         for(char ch: s) {
             if(m[ch]>0) {
-                st.push(m[ch]);
+                st.push(ch);
             }
             else {
                 if(st.empty()) return false;
                 char top = st.top();
                 st.pop();
-                if(top + m[ch] != 0)
+                if(m[top] + m[ch] != 0)
                     return false;
             }
         }
